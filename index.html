@@ -14,34 +14,10 @@
         <div class="pokemon-boxs">
             
             <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" alt="Imagem do pokemon Ditto.">
                 <p>Ditto</p>
             </div>
 
-            <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
-                <p>Ditto</p>
-            </div>
-            
-            <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
-                <p>Ditto</p>
-            </div>
-            
-            <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
-                <p>Ditto</p>
-            </div>    
-
-            <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
-                <p>Ditto</p>
-            </div>
-
-            <div class="pokemon-box">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"/>
-                <p>Ditto</p>
-            </div>
 
             
         </div>
@@ -51,7 +27,29 @@
 
         fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             .then(response => response.json())
-            then(response => console.log(allpokemon))
+            .then(allpokemon =>{
+
+                var pokemons = [];
+
+                allpokemon.results.map((val)=>{
+                   
+
+                    fetch(val.url)
+                        .then(response=>response.json())
+                        .then(pokemonSingle=>{
+                            pokemons.push({name:val.name, image:pokemonSingle.sprites.front_default});
+
+                            if(pokemons.length == 10){
+                                //finalizamos
+                                console.log(pokemons);
+                            }
+                        })
+                })
+
+                pokemons.map((val)=>{
+                    console.log(val.name);
+                })
+            })
 
     </script>
 </body>
